@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Nuevo Producto
+{% endblock title %}
+
+{% block navbartext %}
+   Creación
+{% endblock navbartext %}
+
+{% block header %}
+    Ingrese la información del nuevo producto:
+{% endblock header %}
+
+{% block body %}
+<div class="row align-items-center mt-3 ">
+    <div class="col-sm-1 col-md-3"></div>
+    <div class="col-sm-10 col-md-6">
+        <form method="POST" id="form_1">
+            {% csrf_token %}
+            {% block form %}{{form_1.as_table}}{% endblock form %}
+            {% block buttons %}
+                <button type="submit" form="form_1" class="btn btn-primary mt-3">Registrar</button>
+                <button type="reset" form="form_1" class="btn btn-danger mt-3">Cancelar</button>
+                <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Nuevo Proveedor
+                </button>
+<!--            <a class="btn btn-success mt-3" href="{% url 'compra:nuevo_proveedor' %}">Nuevo proveedor</a>-->
+            {% endblock buttons %}
+        </form>
+    </div>
+    <div class="col-sm-1 col-md-5"></div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese la información del Proveedor:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form method="POST" id="form_2">
+          <div class="modal-body">
+            <div class="container-fluid">
+                {% csrf_token %}
+                {{form_2.as_table}}
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" form="form_2" class="btn btn-primary mt-3">Registrar</button>
+              <button type="reset" form="form_2" class="btn btn-danger mt-3">Cancelar</button>
+            <button type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}

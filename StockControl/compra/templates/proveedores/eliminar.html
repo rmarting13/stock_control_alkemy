@@ -1,0 +1,10 @@
+{% extends 'productos/eliminar.html' %}
+
+{% block header %}
+   Eliminar Producto
+{% endblock header %}
+
+{% block objectInfo %}
+    <h3>¿Esta seguro/a que desea eliminar este proveedor? <br>
+    Producto: <span class="text-primary">"{{proveedor.nombre}} {{proveedor.apellido}} - {{proveedor.razon_soc}}"</span></h3>
+{% endblock objectInfo %}

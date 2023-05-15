@@ -1,0 +1,86 @@
+{% extends 'productos/detalle.html' %}
+
+{% block title %}
+   Detalle Proveedor
+{% endblock title %}
+
+{% block navbartext %}
+   Información del Proveedor
+{% endblock navbartext %}
+
+{% block header %}
+   Detalle del Proveedor
+{% endblock header %}
+
+{% block detailHeader %}
+   {{proveedor.nombre}} {{proveedor.apellido}}
+{% endblock detailHeader %}
+
+{% block detailBody %}
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-sm-6 text-start">
+                <b>Razón Social:</b>
+            </div>
+            <div class="col-sm-6 text-end">
+                {{proveedor.razon_soc}}
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-sm-6 text-start">
+                <b>DNI:</b>
+            </div>
+            <div class="col-sm-6 text-end">
+                {{proveedor.dni}}
+            </div>
+        </div>
+    </li>
+<!--    <li class="list-group-item">-->
+<!--        <div class="row">-->
+<!--            <div class="col-sm-4 text-start">-->
+<!--                <b>Stock:</b>-->
+<!--            </div>-->
+<!--            <div class="col-sm-8 text-end">-->
+<!--                {{producto.stock_actual}}-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </li>-->
+    <li class="list-group-item text-center">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <strong>Información de contacto</strong>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <ul>
+                      <li>
+                          <strong>Email:</strong>   <span class="text-primary">{{proveedor.email}}</span>
+                      </li>
+                      <li>
+                          <strong>Teléfono/Móvil:</strong>  {{proveedor.tel}}
+                      </li>
+                      <li>
+                          <strong>Domicilio:</strong>   {{proveedor.domicilio}}
+                      </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row align-items-center">
+            <div class="col-sm-4 text-start">
+                <a class="btn btn-primary mt-1" href="{% url 'compra:editar_proveedor' proveedor.id %}">Editar</a>
+            </div>
+            <div class="col-sm-8 text-end">
+                <a class="btn btn-danger mt-1" href="{% url 'compra:eliminar_proveedor' proveedor.id %}">Eliminar</a>
+            </div>
+        </div>
+    </li>
+{% endblock detailBody %}

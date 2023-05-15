@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Productos
+{% endblock title %}
+
+{% block navbartext %}
+   Listado
+{% endblock navbartext %}
+
+{% block header %}
+   Lista de productos
+{% endblock header %}
+
+{% block body %}
+<div class="content container">
+  <div class="row align-items-center mt-3 ">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="col-sm-1 text-center" scope="col">#</th>
+            <th class="col-sm-7 text-center" scope="col">Descripción</th>
+            <th class="col-sm-4 text-center" scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% block tableBody %}
+            {% for producto in productos %}
+              <tr>
+                <th scope="row">{{producto.id}}</th>
+                <td>{{producto.descripcion}}</td>
+                <td class="text-center">
+                  <a class="btn btn-secondary" href="{% url 'compra:detalle_producto' producto.id %}">Ver</a>
+                  <a class="btn btn-primary" href="{% url 'compra:editar_producto' producto.id %}">Editar</a>
+                  <a class="btn btn-danger" href="{% url 'compra:eliminar_producto' producto.id %}">Eliminar</a>
+                </td>
+              </tr>
+            {% endfor %}
+          {% endblock tableBody %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+{% endblock body %}

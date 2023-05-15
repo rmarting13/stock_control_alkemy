@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Detalle
+{% endblock title %}
+
+{% block navbartext %}
+   Información
+{% endblock navbartext %}
+
+{% block header %}
+   Detalle del Producto
+{% endblock header %}
+
+{% block body %}
+    <div class="content container">
+            <div class="row align-items-center mt-3">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <b>{% block detailHeader %}{{producto.descripcion}}{% endblock detailHeader %}</b>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% block detailBody %}
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-4 text-start">
+                                        <b>Marca:</b>
+                                    </div>
+                                    <div class="col-sm-8 text-end">
+                                        {{producto.marca}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-4 text-start">
+                                        <b>Precio:</b>
+                                    </div>
+                                    <div class="col-sm-8 text-end">
+                                        $ {{producto.precio}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-4 text-start">
+                                        <b>Stock:</b>
+                                    </div>
+                                    <div class="col-sm-8 text-end">
+                                        {{producto.stock_actual}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-center">
+                                  <button class="btn btn-secondary my-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Ver información del proveedor
+                                  </button>
+                                <div class="collapse" id="collapseExample">
+                                  <div class="card card-body">
+                                    {{producto.proveedor}}
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-4 text-start">
+                                        <a class="btn btn-primary mt-1" href="{% url 'compra:editar_producto' producto.id %}">Editar</a>
+                                    </div>
+                                    <div class="col-sm-8 text-end">
+                                        <a class="btn btn-danger mt-1" href="{% url 'compra:eliminar_producto' producto.id %}">Eliminar</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endblock detailBody %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+    </div>
+{% endblock body%}

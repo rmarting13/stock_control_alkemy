@@ -1,0 +1,18 @@
+{% extends 'productos/nuevo.html' %}
+
+{% block title %}
+   Editar
+{% endblock title %}
+
+{% block navbartext %}
+   Actualización
+{% endblock navbartext %}
+
+{% block header %}
+   Actualizar Producto
+{% endblock header %}
+
+{% block buttons %}
+<button type="submit" class="btn btn-primary mt-3">Actualizar</button>
+<a class="btn btn-danger mt-3" href="{% url 'compra:productos' %}">Cancelar</a>
+{% endblock buttons %}

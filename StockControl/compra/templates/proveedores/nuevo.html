@@ -1,0 +1,18 @@
+{% extends 'productos/nuevo.html' %}
+
+{% block title %}
+    Nuevo Proveedor
+{% endblock title %}
+
+{% block header %}
+    Ingrese la información del Proveedor:
+{% endblock header %}
+
+{% block form %}
+    {{form.as_table}}
+{% endblock form %}
+
+{% block buttons %}
+    <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+    <button type="reset" class="btn btn-danger mt-3">Cancelar</button>
+{% endblock buttons %}

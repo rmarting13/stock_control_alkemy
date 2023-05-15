@@ -1,0 +1,23 @@
+{% extends 'productos/listado.html' %}
+
+{% block title %}
+    Proveedores
+{% endblock title %}
+
+{% block header %}
+   Lista de proveedores
+{% endblock header %}
+
+{% block tableBody %}
+{% for proveedor in proveedores %}
+  <tr>
+    <th scope="row">{{proveedor.id}}</th>
+    <td>{{proveedor.nombre}} {{proveedor.apellido}} - {{proveedor.razon_soc}}</td>
+    <td class="text-center">
+      <a class="btn btn-secondary" href="{% url 'compra:detalle_proveedor' proveedor.id %}">Ver</a>
+      <a class="btn btn-primary" href="{% url 'compra:editar_proveedor' proveedor.id %}">Editar</a>
+      <a class="btn btn-danger" href="{% url 'compra:eliminar_proveedor' proveedor.id %}">Eliminar</a>
+    </td>
+  </tr>
+{% endfor %}
+{% endblock tableBody %}
