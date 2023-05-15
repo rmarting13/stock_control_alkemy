@@ -1,7 +1,7 @@
-from django.forms import modelform_factory, NumberInput, inlineformset_factory
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy, reverse
-from django.views.generic import TemplateView, ListView, CreateView, DeleteView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, DeleteView
 
 from .forms import ProductoForm, ProveedorForm
 from .models import Producto, Proveedor
@@ -10,7 +10,6 @@ from .models import Producto, Proveedor
     Cuando se utilizan vistas basadas en clases, el funcionamiento es el siguiente:
     1- dispatch(): valida la petición y selecciona el método HTTP (GET, POST, PUT) que se utilizó para la solicitud.
     2- http_method_not_allowed(): arroja un error si el método HTTP utilizado por la petición no está definido o no es soportado.
-    3- options()
 """
 
 """
@@ -50,6 +49,7 @@ class ListadoProductos(ListView):
 
 # En caso de no utilizar el formulario personalizado ProductoForm definido en forms.py:
 #ProductoForm = modelform_factory(Producto, exclude=[])
+
 # Vista basada en funciones:
 def agregarProducto(request):
     proveedor_form = ProveedorForm(request.POST)
@@ -69,51 +69,6 @@ def agregarProducto(request):
     }
     return render(request, 'productos/nuevo.html', context)
 
-
-# ProductoFormSet = inlineformset_factory(Producto,
-#                                         Proveedor,
-#                                         form=ProductoForm,
-#                                         extra=1,
-#                                         can_delete=False,
-#                                         can_order=False)
-#
-#
-# # Vista basada en clases:
-# class AgregarProducto(CreateView):
-#     model = Producto
-#     form_class = ProductoForm  # Formulario del objeto (model) padre
-#     template_name = 'productos/nuevo.html'
-#
-#     # On successful form submission
-#     def get_success_url(self):
-#         return reverse('marca:nuevo_producto')
-#
-#     # Validate forms
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         inlines = context['inlines']
-#         if inlines.is_valid() and form.is_valid():
-#             self.object = form.save()  # Se guardan tanto Producto (padre) como Proveedor (hijo)
-#             return redirect(self.get_success_url())
-#         else:
-#             return self.render_to_response(self.get_context_data(form=form))
-#
-#     def form_invalid(self, form):
-#         return self.render_to_response(self.get_context_data(form=form))
-#
-#     # We populate the context with the forms. Here I'm sending
-#     # the inline forms in `inlines`
-#     def get_context_data(self, **kwargs):
-#         context = super(AgregarProducto, self).get_context_data(**kwargs)
-#         if self.request.POST:
-#             context['form'] = ProductoForm(self.request.POST)
-#             context['inlines'] = ProductoFormSet(self.request.POST)
-#         else:
-#             context['form'] = Producto()
-#             context['inlines'] = ProductoFormSet()
-#         return context
-
-
 # Vista basada en funciones:
 def modificarProducto(request, id):
     producto = get_object_or_404(Producto, pk=id)
@@ -131,11 +86,6 @@ def modificarProducto(request, id):
         producto_form = ProductoForm(instance=producto)
         # Enviamos el objeto producto_form que contiene el formulario con la información obtenida de la base de datos
     return render(request, 'productos/editar.html', {'form': producto_form})
-
-
-# Vista basada en clases:
-class ModificarProducto(UpdateView):
-    pass
 
 
 # Vista basada en funciones:
@@ -167,28 +117,6 @@ def detalleProducto(request, id):
     producto = Producto.objects.get(pk=id)
     return render(request, 'productos/detalle.html', {'producto': producto})
 
-
-# Vista basada en clases:
-class DetalleProducto(TemplateView):
-    pass
-
-
-# ProveedorForm = modelform_factory(
-#     Proveedor,
-#     exclude=[],
-#     widgets={
-#         'dni': NumberInput(attrs={'class': 'form-control', 'min': 0, 'step': 1, 'style': 'width:8ch'}),
-#         'tel': NumberInput(attrs={'min': 0, 'step': 1, 'style': 'width:10ch'}),
-#         'nombre': NumberInput(attrs={'class': 'form-control'}),
-#         'apellido': NumberInput(attrs={'class': 'form-control'}),
-#         'razon_soc': NumberInput(attrs={'class': 'form-control'}),
-#         'domicilio': NumberInput(attrs={'class': 'form-control'}),
-#     },
-#     labels={
-#         'dni': 'DNI',
-#         'tel': 'Teléfono/Móvil',
-#     }
-# )
 
 def agregarProveedor(request):
     if request.POST:

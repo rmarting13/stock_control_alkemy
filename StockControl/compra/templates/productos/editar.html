@@ -12,6 +12,10 @@
    Actualizar Producto
 {% endblock header %}
 
+{% block form %}
+   {{form.as_table}}
+{% endblock form %}
+
 {% block buttons %}
 <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
 <a class="btn btn-danger mt-3" href="{% url 'compra:productos' %}">Cancelar</a>

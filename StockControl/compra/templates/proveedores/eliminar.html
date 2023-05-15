@@ -8,3 +8,7 @@
     <h3>¿Esta seguro/a que desea eliminar este proveedor? <br>
     Producto: <span class="text-primary">"{{proveedor.nombre}} {{proveedor.apellido}} - {{proveedor.razon_soc}}"</span></h3>
 {% endblock objectInfo %}
+
+{% block url %}
+    <a class="btn btn-secondary mt-2" href="{% url 'compra:proveedores' %}">Cancelar</a>
+{% endblock url %}

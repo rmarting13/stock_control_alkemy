@@ -38,7 +38,9 @@
       <form action="" method="post">
         {% csrf_token %}
           <button type="submit" class="btn btn-success mt-2">Confirmar</button>
-          <a class="btn btn-secondary mt-2" href="{% url 'compra:productos' %}">Cancelar</a>
+          {% block url %}
+            <a class="btn btn-secondary mt-2" href="{% url 'compra:productos' %}">Cancelar</a>
+          {% endblock url %}
       </form>
     </div>
   </div>

@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ValidationError, NumberInput, EmailInput
+from django.forms import ModelForm, NumberInput, EmailInput
 from django.utils.translation import gettext_lazy as _
 from .models import Producto, Proveedor
 
@@ -25,22 +25,6 @@ class ProveedorForm(ModelForm):
             'tel': _('Teléfono/Móvil'),
             'domicilio':_('Domicilio')
         }
-
-
-def floatValidator(value):
-    if value is not None:
-        decimalString = str(value).split('.')
-        decimal = int(decimalString[1])
-        if not (decimal % 5 == 0):
-            raise ValidationError(message=_('Ingrese un valor cuyo decimal sea múltiplo de 5.'))
-        else:
-            raise ValidationError('Este campo es requerido.')
-
-
-# def textValidator(value):
-#     if value is None:
-#         raise ValidationError('Este campo es requerido.')
-
 
 class ProductoForm(ModelForm):
     # precio = FloatField(validators=[floatValidator])
